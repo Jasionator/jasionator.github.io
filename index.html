@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pl-PL">
 <head>
+	<!-- prevent user zomming -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
@@ -8,14 +11,24 @@
 		<h1>Jak oceniasz ... ?</h1>
 	</div>
 	<div class="horizontal-container">
-		<div class="ocena" id="ocena1">Bardzo źle</div>
-		<div class="ocena" id="ocena2">Źle</div>
-		<div class="ocena" id="ocena3">Może być</div>
-		<div class="ocena" id="ocena4">Dobrze</div>
-		<div class="ocena" id="ocena5">Bardzo dobrze</div>
+		<div class="ocena">
+			<p class="ocena-liczba"></p>
+		</div>
+		<div class="ocena">
+			<p class="ocena-liczba"></p>
+		</div>
+		<div class="ocena">
+			<p class="ocena-liczba"></p>
+		</div>
+		<div class="ocena">
+			<p class="ocena-liczba"></p>
+		</div>
+		<div class="ocena">
+			<p class="ocena-liczba"></p>
+		</div>
 	</div>
-	<button id="go-to-summary">Podsumowanie</button>
-	
+	<!-- <button id="go-to-summary">Podsumowanie</button> -->
+
 	<script src="main.js"></script>
 </body>
 </html>

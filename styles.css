@@ -4,12 +4,16 @@ body {
 }
 
 * {
-	font: ubuntu;
+	font-family: "Arial";
 }
 
 .header {
 	height: 30vh;
 	text-align: center;
+}
+
+h1 {
+	font-size: 6vw;
 }
 
 .horizontal-container {
@@ -22,10 +26,46 @@ body {
 }
 
 .ocena {
+	user-select: none;
+	
 	width: 15%;
 	aspect-ratio: 1/1;
 	
-	padding: 10px;
+	margin: 1.5%;
+	
+	overflow: hidden;
 	
 	text-align: center;
+	font-size: 7vw;
+	color: white;
+	border-radius: 100%;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+div div:nth-child(1) {
+  background: red;
+}
+
+div div:nth-child(2) {
+  background: orange;
+}
+
+div div:nth-child(3) {
+  background: yellow;
+}
+
+div div:nth-child(4) {
+  background: lightgreen;
+}
+
+div div:nth-child(5) {
+  background: green;
+}
+
+.ocena-liczba {
+	margin: 0;
+	padding: 0;
 }
