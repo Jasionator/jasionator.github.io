@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+/* CONTROL ROOM */
+
+button, input {
+    font-size: 30px;
+    margin: 10px;
+}
+
+.player-management {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+#getLetter, #setWheel {
+    display: flex;
+}
+
+form > div {
+    display: flex;
+    flex-direction: column;
+}
+
+#container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* GAME */
+
+.players-stats {
+    height: 10vh;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-stats {
+    margin: 3vw;
+    font-size: 3vw;
+    text-align: center;
+}
+
+.player-name {
+    padding: 1vw;
+    border: 0.3vw solid #5b5b5b;
+    border-radius: 1vw;
+}
+
+#proverbContainer {
+    width: 100vw;
+    height: 90vh;
+    background-color: #000000;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.letter, .tile {
+    animation: fadein 1s;
+
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+
+    width: 5vw;
+    height: 5vw;
+
+    font-size: 3vw;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+
+.letter > p, .tile > p {
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.letter {
+    background-color: #ffffff;
+    transform: rotateX(180deg);
+    color: white;
+    text-align: center;
+}
+
+
+
+.tile {
+    background-color: #000000;
+    border: 1px solid #5b5b5b;
+}
+
+.letter.flipped {
+    transform-style: preserve-3d;
+    transform: rotateX(360deg);
+    transition: 1s ease;
+    color: black;
+    /*transform-style: preserve-3d;
+    transition: 1s ease;*/
+}
