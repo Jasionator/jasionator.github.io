@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    color: white;
+    font-size: 2vw;
+}
+
+a {
+    text-decoration: none;
+    color: gold;
+    padding: 10px;
+    border: 0.1vw solid rgb(160, 136, 0);
+    border-radius: 1vw;
+    margin: 1vw;
+}
+
+a:hover {
+    color: goldenrod;
+    border-color: rgb(131, 94, 0);
+}
+
+#main-container {
+    width: 100vw;
+    height: 100vh;
+    background-color: #3a3a3a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
