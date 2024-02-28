@@ -1,6 +1,6 @@
 var rate = [0, 0, 0, 0, 0];
 
-var rateButtons = document.getElementsByClassName("ocena");
+var rateButtons = document.getElementsByClassName("emocja");
 var rateCounts = document.getElementsByClassName("ocena-liczba");
 
 for(let i=0; i<5; i++){
