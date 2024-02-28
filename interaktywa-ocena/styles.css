@@ -17,8 +17,18 @@ body {
 
 h1 {
 	font-size: 5vw;
-	color: darkgray;
-}
+	color: #bbbbbb;
+	text-shadow:
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141,
+		1vw 1vw 6vw #414141;
+	}
 
 .horizontal-container {
 	width: 100%;
@@ -68,7 +78,7 @@ h1 {
 	align-self: flex-end;
 	height: 20%;
 	font-size: 7vw;
-	color: #818181;
+	color: #909090;
 	font-weight: bold;
 }
 
@@ -96,4 +106,5 @@ div div:nth-child(5) {
 .ocena-liczba {
 	margin: 0;
 	padding: 0;
+	z-index: 1;
 }
