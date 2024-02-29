@@ -15,7 +15,12 @@ let proverbsJSON = {
 
 class GameWindow {
     #gameWindow = undefined;
+
     #proverbContainer = undefined;
+    #proverbs = new Proverbs(proverbsJSON);
+
+    #category = undefined;
+
     playersStats = undefined;
 
     constructor(){
@@ -31,6 +36,7 @@ class GameWindow {
         );
         this.playersStats = new PlayersStats(this.#gameWindow.document.body);
         this.#proverbContainer = new ProverbContainer(this.#gameWindow.document.body);
+        this.#category = new Category(this.#gameWindow.document.body);
     }
 
     get get(){
@@ -50,9 +56,34 @@ class GameWindow {
     }
 
     nextProverb(){
-        this.#proverbContainer.newProverb();
+        console.log("nextProverb");
+
+        this.#proverbs.next();
+        this.#proverbContainer.newProverb(this.#proverbs.proverbString);
+        this.#category.setCategory(this.#proverbs.proverbCategory);
     }
 
+}
+
+class Category {
+    #htmlElement = undefined;
+
+    constructor(containerElement){
+        containerElement.appendChild(this.#createElement);
+        this.#htmlElement = containerElement.getElementsByClassName('category')[0];
+    }
+
+    setCategory(category){
+        console.log("category", category);
+        this.#htmlElement.textContent = category;
+    }
+
+    get #createElement(){
+        let container = document.createElement("div");
+        container.classList.add("category");
+
+        return container;
+    }
 }
 
 class PlayersStats{
@@ -154,7 +185,6 @@ class PlayersStats{
 
 class ProverbContainer {
     #proverbContainer;
-    #proverbs = new Proverbs(proverbsJSON);
     #proverb = undefined;
 
     #countOfLetters = null;
@@ -179,8 +209,8 @@ class ProverbContainer {
         return this.#flipped;
     }
 
-    newProverb(){
-        this.#proverb = this.#proverbs.randomProverb();
+    newProverb(proverbString){
+        this.#proverb = proverbString;
         this.#proverbContainer.textContent = '';
         this.#proverb.initialize(this.#proverbContainer);
         this.#countOfLetters = this.#proverb.countOfLetters;
@@ -197,6 +227,9 @@ class ProverbContainer {
 class Proverbs{
     #proverbsSet = {};
 
+    #proverbString = null;
+    #proverbCategory = null;
+
     constructor(jsonData){
         for(const [category_, provs_] of Object.entries(jsonData)){
             let provs = []
@@ -211,17 +244,27 @@ class Proverbs{
         return Math.floor(Math.random() * arr.length);
     }
 
-    randomProverb() {
+    get proverbString(){
+        return this.#proverbString;
+    }
+
+    get proverbCategory(){
+        console.log(this.#proverbCategory);
+        return this.#proverbCategory;
+    }
+
+    next() {
         var size = Object.keys(this.#proverbsSet).length;
         if(size === 0){
             console.log("you have had run out of proverbs");
-            return '';
+            return false;
         }
 
         let categories = Array.from(Object.keys(this.#proverbsSet));
 
         let randomCategoryIndex = Proverbs.#randomIndex(categories);
         let randomCategory = categories[randomCategoryIndex];
+        
 
         let randomProverbIndex = Proverbs.#randomIndex(this.#proverbsSet[randomCategory]);
         let randomProverb = this.#proverbsSet[randomCategory][randomProverbIndex];
@@ -232,8 +275,11 @@ class Proverbs{
         if(this.#proverbsSet[randomCategory].length === 0) {
             delete this.#proverbsSet[randomCategory];
         }
+        
+        this.#proverbString = randomProverb;
+        this.#proverbCategory = randomCategory;
 
-        return randomProverb;
+        return true;
     }
 }
 
@@ -964,7 +1010,7 @@ class Game {
                 this.#gameWindow.playersStats.update(name);
             }
 
-            this.#gameWindow.nextProverb()
+            this.#gameWindow.nextProverb();
         });
     }
 }

@@ -64,13 +64,20 @@ form > div {
 
 #proverbContainer {
     width: 100vw;
-    height: 90vh;
+    height: 80vh;
     background-color: #000000;
     color: white;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+}
+
+.category {
+    height: 10vh;
+    background-color: #000000;
+    text-align: center;
+    color: wheat;
 }
 
 .letter, .tile {

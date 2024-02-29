@@ -17,3 +17,14 @@ window.onbeforeunload = function(event){
 document.addEventListener('contextmenu', event => {
     event.preventDefault();
 });
+
+var elem = document.getElementById("app");
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
