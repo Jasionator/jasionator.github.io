@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    border: 0;
+    font-size: 24px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    background-color: #bcbcbc;
+}
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px white;
+}
+
+h1, h2, h3, h4 {
+    text-align: center;
+}
+
+h1 {
+    padding: 5px 0;
+    font-size: 45px;
+}
+
+h2, h3, h4 {
+    font-weight: normal;
+}
+
+h2 {
+    font-size: 37px;
+}
+
+h3 {
+    font-size: 29px;
+}
+
+.comment {
+    font-weight: normal;
+    color: red;
+}
+
+.function {
+    font-weight: normal;
+    color: purple;
+}
+
+.function-old {
+    font-weight: normal;
+    color: #986598;
+}
+
+.command {
+    font-weight: normal;
+    color: #2ba100;
+}
+
+.insignia {
+    color: #0098c6;
+}
+
+.panel {
+    padding: 20px;
+}

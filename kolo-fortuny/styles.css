@@ -41,7 +41,7 @@ form > div {
 /* GAME */
 
 .players-stats {
-    height: 10vh;
+    height: 31vh;
     background-color: #000000;
     color: white;
     display: flex;
@@ -64,7 +64,7 @@ form > div {
 
 #proverbContainer {
     width: 100vw;
-    height: 80vh;
+    height: 60vh;
     background-color: #000000;
     color: white;
     display: flex;
@@ -74,10 +74,18 @@ form > div {
 }
 
 .category {
-    height: 10vh;
+    height: 9vh;
     background-color: #000000;
     text-align: center;
     color: wheat;
+    font-size: 3vw;
+}
+
+.word {
+	display: flex;
+	flex-wrap: no-wrap;
+	flex-direction: row;
+	margin: 0 2.5vw;
 }
 
 .letter, .tile {

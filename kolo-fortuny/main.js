@@ -1,13 +1,8 @@
 let proverbsJSON = {
-    "sport": [
-        "sport 1",
-        "sport 2",
-        "sport 3"
-    ],
-    "coinnego": [
-        "coinnego 1",
-        "coinnego 2",
-        "coinnego  3"
+    "przysłowie": [
+        "PROSTA DROGA NAJKRÓTSZA",
+        "BABA Z WOZU, KONIOM LŻEJ",
+        "KOMU PORA, TEMU CZAS"
     ]
 };
 
@@ -293,28 +288,48 @@ class Proverb {
 
     constructor(lettersString){
         let id = 0;
+        
         for(const letter of lettersString){
-            if(this.#allowedLetters.search(letter) != -1){
+			if(letter == ' '){
+				this.#letters.push(null);
+				id = 0; //reset id in new word
+			}else if(this.#allowedLetters.search(letter) != -1){
                 this.#letters.push(new Letter(letter, id));
                 this.#countOfLetters++;
+                id++;
             }else{
                 this.#letters.push(new Tile(letter));
             }
-            id++;
         }
     }
 
     initialize(proverbContainer){
         this.#proverbContainer = proverbContainer;
+        var word = this.#createElementWord;
+        this.#proverbContainer.appendChild(word);
+        
         for(let i = 0; i < this.#letters.length; i++){
-            this.#letters[i].initialize(proverbContainer);
-            //this.#letters[i].flip();
+			if(this.#letters[i] === null){
+				word = this.#createElementWord;
+				this.#proverbContainer.appendChild(word);
+			}else{
+				this.#letters[i].initialize(word);
+			}
         }
     }
+    
+    get #createElementWord(){
+		let word = document.createElement("div");
+        word.classList.add("word");
+        return word;
+	}
 
     setActive(letter){
         let count = 0;
         for(let i = 0; i < this.#letters.length; i++){
+			if(this.#letters[i] === null){
+				continue;
+			}
             //this.#letters[i].flip();
             if(this.#letters[i].content == letter && !this.#letters[i].flipped){
                 this.#letters[i].flip();
@@ -365,10 +380,10 @@ class Letter extends Tile {
         this.#id = id;
     }
 
-    initialize(proverbContainer){
-        proverbContainer.appendChild(this.#createElement);
+    initialize(wordContainer){
+        wordContainer.appendChild(this.#createElement);
 
-        this.#letter = proverbContainer.getElementsByClassName('letter')[this.#id];
+        this.#letter = wordContainer.getElementsByClassName('letter')[this.#id];
         this.#contentElem = this.#letter.getElementsByTagName('p')[0];
     }
 

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Szablon Mszy Świętej</title>
+</head>
+<body onload="initializeVisibility()">
+    <!--fix bug in firefox-->
+    <input type="checkbox" checked style="display: none;"/>
+    <!--fix bug in firefox - end-->
+    <fieldset>
+        <legend>Schowaj lub pokaż</legend>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="bishop" checked onclick="changeVisibility(this); toggleDisable(this, 'bishop-optionals');"/>
+            <label for="bishop">części z biskupem</label>
+            <fieldset id="bishop-optionals">
+                <div>
+                    <input class="visibility-changer" type="checkbox" value="bishop-opt-entry" onclick="changeVisibility(this);"/>
+                    <label for="bishop-opt-entry">indywidualna modlitwa biskupa po wejściu przed Najświętszym Sakramentem</label>
+                </div>
+                <div>
+                    <input class="visibility-changer" type="checkbox" value="bishop-bless-with-gospel-book" onclick="changeVisibility(this);"/>
+                    <label for="bishop-opt-entry">błogosławieństwo ewangeliarzem</label>
+                </div>
+            </fieldset>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="deacon" onclick="changeVisibility(this);"/>
+            <label for="deacon">części z diakonami</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="confirmation" onclick="changeVisibility(this);"/>
+            <label for="confirmation">bierzmowanie</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="local-tradition" onclick="changeVisibility(this);"/>
+            <label for="local-tradition">lokalne tradycje</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="reception" onclick="changeVisibility(this);"/>
+            <label for="reception">Pierwsza Komunia Święta</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="parish-indulgence" onclick="changeVisibility(this);"/>
+            <label for="parish-indulgence">Odpust Parafialny</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="exposition" onclick="changeVisibility(this);"/>
+            <label for="exposition">Wystawienie Najświętszego Sakramentu</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="eucharistic-procession" onclick="changeVisibility(this);"/>
+            <label for="eucharistic-procession">Procesja Eucharystyczna</label>
+        </div>
+        <div>
+            <input class="visibility-changer" type="checkbox" value="dlugie-wyjscie" onclick="changeVisibility(this);"/>
+            <label for="dlugie-wyjscie">Długie wyjście</label>
+        </div>
+    </fieldset>
+
+    <div class="content">
+        <h1>UROCZYSTA MSZA ŚWIĘTA</h1>
+        <h1 class="bishop">POD PRZEWODNICTWEM KSIĘDZA BISKUPA</h1>
+        <h1 class="confirmation">Z UDZIELENIEM SAKRAMENTU BIERZMOWANIA</h1>
+        <h1 class="reception">Z DZIEĆMI, KTÓRE PIERWSZY RAZ PRZYJMUJĄ NAJŚWIĘTSZY SAKRAMENT</h1>
+        <h1 class="parish-indulgence">ODPUST PARAFIALNY</h1> <!-- PARAFII MATKI BOSKIEJ CZĘSTOCHOWSKIEJ W CHARZYKOWACH POD PRZEWODNICTWEM KS. BISKUPA ARKADIUSZA OKROJA-->
+        <ul class="bishop">
+            <span class="comment">
+            Ogólne zasady, jeżeli jest biskup:
+            <li>przechodząc przed biskupem – pokłon,</li>
+            <li>ministrant pastorału – trzyma pastorał z częścią zakrzywioną zwróconą do siebie,</li>
+            <li>przed i po pełnieniu posługi wobec biskupa — pokłon</li>
+            </span>
+        </ul>
+        <p class="local-tradition">
+            <span class="comment">W niektórych parafiach:</span></br>
+            <span class="function">Ministranci asystujący -</span>
+        </p>
+        <p class="confirmation function">
+            Ministranci rozdający pamiątkowe obrazki -
+        </p>
+        <p class="reception function">
+            Ministranci zapalający świece dzieciom -
+        </p>
+        <p class="local-tradition">
+            <span class="comment">Charzykowy: 15 min przed Mszą Św.:</span></br>
+            <span class="function">Ministrant dzwoniący dzwonem kościelnym -</span>
+        </p>
+        <p class="command">
+            → silentium (cisza)
+        </p>
+        <h2>OBRZĘDY WSTĘPNE</h2>
+        <p class="bishop insignia">»Mitra i pastorał»wręczenie</p>
+        <p class="bishop function">Ministranci insygniów -</p>
+        <h3>Ustawienie asysty i modlitwa</h3>
+        <p class="command">→ impositio incensi (zasypanie kadzidła)</p>
+        <h3>
+            <span class="comment bishop">na początek - pokłon do ks. biskupa</span>
+            zasypanie kadzidła
+            <span class="comment bishop">na koniec - pokłon do ks. biskupa</span> 
+        </h3>
+        <p class="command">→ procedant (idziemy)</p>
+        <p class="function">Ministrant kadzidła -</p>
+        <p class="function">Ministrant łódki -</p>
+        <h3>procesja wejścia</h3>
+        <ul class="comment bishop bishop-opt-entry">
+            (może zbędny komentarz) Możliwe, np. gdy jest bierzmowanie, odpust to ks. biskup po procesji wejścia wejdzie do zakrystii, aby ubrać szaty liturgiczne, więc:
+            <li>w procesji nie idą ministranci insygniów, tylko czekają w zakrystii,</li>
+            <li>na wejście trzeba przygotować klęcznik dla biskupa</li>
+        </ul>
+        <p class="function">Ministrant od sygnaturki -</p>
+        <p class="function">Ministrant kadzidła i ministrant łódki</p>
+        <p class="function">Ministranci światła -</p>
+        <p class="function">Ministrant krzyża -</p>
+        <p class="function">Zgodnie z miejscowymi zwyczajami feretrony<span class="comment local-tradition">. W Charzykowach za usługującymi</span></p>
+        <p class="function-old">pozostali usługujący</p>
+        <p class="function">Diakon lub lektor z księgą ewangelii -</p>
+        <p class="function-old">prezbiterzy<span class="bishop">, ks. Biskup</span></p>
+        <p class="comment bishop">
+            jeżeli ks. biskup po procesji wejścia nie wejdzie do zakrystii aby ubrać szaty liturgiczne:</br>
+            <span class="function-old">Ministranci insygniów</span>
+        </p>
+        <p class="comment bishop">
+            Pod chórem:
+            <span class="function">Ministrant z kociłkiem i kropidłem -</span>
+        </p>
+        <p class="command">→ sistant (stajemy) → genu flectant (klękamy) / inclinatio ad altare (pokłon do ołtarza)</p>
+        <h3>znak czci Najświętszemu Sakramentowi</h3>
+        <p class="comment">można robić go po dwie osoby, osoby trzymające kadzielnicę i świece czynią skłon głowy</p>
+
+        <div class="bishop bishop-opt-entry">
+            <p class="comment">
+                jeżeli ks. biskup po procesji wejścia wejdzie do zakrystii aby ubrać szaty liturgiczne:
+                - ministranci kadzidła i łódki idą do zakrystii po dojściu do ołtarza
+            </p>
+            <h3>chwila ciszy przed ołtarzem</h3>
+            <p class="comment">ks. biskup klęczy na klęczniku - służba liturgiczna może też obok klęczeć lub iść na miejsca. Raczej lepsza jest druga obcja.</p>
+            <p class="function">Ministrant usuwający klęcznik -</p>
+        </div>
+
+        <p class="parish-indulgence">
+            {O?
+            ◦ Powitanie Księdza Biskupa przez przedstawicieli parafii
+            Ministrant mikrofonu -?O}
+        </p>
+        <p class="confirmation">
+            {B?Jeżeli jest bierzmowanie:
+                ◦ Prośba rodziców skierowana do Księdza Biskupa o udzielenie sakramentu Bierzmowania
+            Ministrant mikrofonu -
+                ◦ Słowo Księdza Proboszcza
+                ◦ {Poświęcenie pamiątek do bierzmowania:
+            Ministrant z kociłkiem i kropidłem} ?B}
+        </p>
+        <div class="bishop bishop-opt-entry">
+            {jeżeli ks. biskup po procesji wejścia wejdzie do zakrystii aby ubrać szaty liturgiczne to robi to w tym momencie. W zakrystii:
+            Ministranci insygniów
+                    ◦ Ks. Biskup ubiera szaty liturgiczne
+            Ministrant od sygnaturki
+            Wychodzią pierwsi ministarnci kadzidła:
+            Ministrant kadzidła i ministrant łódki}
+        </div>
+        <p class="bishop insignia">»Mitra i pastorał»odebranie</p>
+        <p class="bishop command">→ osculum altaris (ucałowanie oltarza)</p>
+        <h3>ucałowanie ołtarza</h3>
+        <!--→ ad loca sua (na miejsca)-->
+        <p class="local-tradition">
+            {W niektórych parafiach (do zrobienia)
+            Ministranci asystujący}
+        </p>
+        <p class="bishop function">Ministranci insygniów</p>
+        <h3>okadzenie ołtarza</h3>
+        <p class="comment">
+            <span class="bishop">na początek - pokłon do ks. biskupa; </span>
+            <span class="deacon">diakon trzyma łódkę po lewej stronie ministranta kadzidła</span> 
+            zasypanie kadzidła 
+            <span class="deacon">
+                diakon oddaje łódkę ministrantowi łódki i przekazuje kadzielnicę celebransowi; 
+                <span class="bishop">pokłon do ks. Biskupa - ministranci kadzidła i łódki odchodzą</span>; 
+                diakon asystuje po prawej stronie celebransa
+            </span> 
+            1. okadzenie ołtarza, 2. (pokłon) okadzenie krzyża (pokłon)
+            <span class="deacon">; przychodzi ministrant kadzidła - diakon oddaje kadzielnice</span>
+            <span class="bishop">; na koniec - pokłon do ks. biskupa</span>
+        </p>
+        <p class="function">Ministrant kadzidła i ministrant łódki</p>
+        <p class="bishop insignia">»Mitra i pastorał»ewentualnie na przejście</p>
+        <h3>Znak krzyża</h3>
+        <h3>wprowadzenie</h3>
+        <div class="parish-indulgence">{O?
+            ◦ Słowo Ks. Proboszcza
+    {Ministrant mikrofonu -} ?O}</div>
+        <h3>akt pokuty</h3>
+        <p class="function">Ministrant księgi -</p>
+        <p class="function">Ministrant mikrofonu -</p>
+        <h3>Hymn Chwała na wysokości</h3>
+        <h3>Kolekta</h3>
+        <p class="bishop insignia">»Mitra»nałożenie</p>
+        <p class="function">Ministrant księgi</p>
+        <p class="function">Ministrant mikrofonu</p>
+        <h2>LITURGIA SŁOWA</h2>
+        <p class="comment">Pokłon przed ołtarzem lektora I</p>
+        <h3>pierwsze czytanie</h3>
+        <p class="function">Lektor I -</p>
+        <p class="comment">Pokłon przed ołtarzem psałterzysty i lektora I</p>
+        <h3>psalm responsoryjny</h3>
+        <p class="function">Psałterzysta(lub inna osoba) -</p>
+        <p class="comment">Pokłon przed ołtarzem psałterzysty i lektora II</p>
+        <h3>drugie czytanie</h3>
+        <p class="function">Lektor II -</p>
+        <h3><span class="comment">jeżeli jest: </span>sekwencja</h3>
+        <p class="comment">Pokłon przed ołtarzem psałterzysty i lektora II</p>
+        <h3>śpiew przed ewangelią</h3>
+        <p class="function">Psałterzysta(lub inna osoba)</p>
+        <p class="command">→ inclinatio (pokłon) → severtant (obracamy się) → procedant (idziemy)</p>
+        <h4>zasypanie kadzidła</h4>
+        <p class="comment">
+            <span class="bishop">na początek - pokłon do ks. biskupa, jeżeli biskup siedzi – posługujący klękają</span>
+            <span class="deacon">diakon trzyma łódkę po lewej stronie ministranta kadzidła</span> zasypanie
+            <span class="deacon">diakon oddaje łódkę ministrantowi łódki</span>
+            <span class="bishop">na koniec - pokłon do ks. biskupa</span>
+        </p>
+        <h4>błogosławieństwo czytającego ewangelię</h4>
+        <p class="bishop insignia">»Mitra»odebranie</p>
+        <p class="comment">
+            Ustawienie procesji do ambony:
+            ministrant łódki i ministrant kadzidła
+           (jeżeli ambona jest po lewej stronie, to kadzidło stoi po lewej stronie; jeżeli ambona jest po prawej stronie to kadzidło stoi po prawej stronie)
+           Diakon lub prezbiter
+           Ministranci światła</br>
+           Podczas słów ewangelii wszyscy stoją zwróceni w stronę czytającego.
+        </p>
+        <h3>ewangelia</h3>
+        <p class="comment">po słowach: Słowa Ewangelii według św. N.:</p>
+        <h4>znak krzyża</h4>
+        <p class="bishop insignia">»Pastorał»wręczenie</p>
+        <h4>okadzenie ewangeliarza</h4>
+        <p class="comment">Po ewangelii: <span class="command">→ severtant (obracamy się) → procedant (idziemy)</span></p>
+        <h4 class="bishop bishop-bless-with-gospel-book">Błogosławieństwo ewangeliarzem</h4>
+        <p class="comment bishop bishop-bless-with-gospel-book"><span class="insignia">»pastorał»odebranie</span> błogosławieństwo <span class="insignia">»pastorał»wręczenie</span>
+            uwaga: w tym czasie aklamacja (Alleluja/Chwała Tobie...) jest powtórzona, kadzidło i świece mogą w tym czasie zostać w prezbiterium
+        </p>
+        <p class="command">→ inclinatio (pokłon) → ad loca sua (na miejsca)</p>
+        <p class="confirmation">{B? Jeżeli jest bierzmowanie:
+            ◦ Dialog Księdza Biskupa z Księdzem Proboszczem
+            Obrzędy Bierzmowania s. 27.
+            Dialog rozpoczyna Ksiądz Biskup prosząc aby wszyscy usiedli, a w postawie stojącej została młodzież bierzmowana.
+            ?B}
+        </p>
+        <p class="bishop insignia">»mitra»podanie</p>
+        <p class="comment bishop">jeżeli homilia jest z ambony: <span class="insignia">»pastorał»odebranie</span></p>
+        <h3>homilia</h3>
+        <p class="bishop comment">po chwili ciszy: <span class="insignia">»Mitra i pastorał»odebranie</span></p>
+        <p class="confirmation">{B? Jeżeli jest bierzmowanie:
+            ◦ Odnowienie przyrzeczeń chrzcielnych
+            Po odnowieniu przyrzeczeń chrzcielnych Bikup zapowiada hymn do Ducha Świętego: „Przybądź Stwórco Duchu Boży”
+                    ◦ Modlitwa i włożenie rąk
+            Po modlitwie biskup schodzi przed ołtarz.
+            Przy ławkach po obu stronach: Ministranci rozdający pamiątkowe obrazki
+            {Obcjonalnie: Ministrant mszału (z księgą)}
+            Ministrant mikrofonu
+                    ◦ Namaszczenie Krzyżmem św.
+            - Kandydaci do Sakramentu Bierzmowania podchodą w dwóch rzędach do Księdza Biskupa
+            - Świadkowie kandydatów do bierzmowania trzymają prawą rękę na prawym ramieniu kandydata w momencie bierzmowania
+                    Po bierzmowaniu: »Mitra i pastorał»odebranie
+                    Po bierzmowaniu(w tym samym momencie):
+            - przygotowuje się młodzież do modlitwy powszechnej
+            - na końcu procesji kandydatów do bierzmowania lavabo i cytryna
+            Ministranci z lavabo oraz cytryną -
+            ?B}
+        </p>
+        <h3 class="if-not-confirmation">wyznanie wiary</h3>
+        <h3 class="parish-indulgence">Jasnogórskie Śluby Narodu</h3>
+        <h3>Modlitwa powszechna</h3>
+        <p class="comment bishop">po zakończeniu: <span class="insignia">»mitra»podanie</span></p>
+        <p class="function">Ministrant księgi (z ante i post)</p>
+        <p class="function">Ministrant mikrofonu</p>
+        <p class="deacon comment">diakon lub:</p>
+        <p class="function">Ministrant/lektor czytający modlitwę powszechną -</p>
+        <p class="function">Ministrant księgi (z ante i post)</p>
+        <p class="function">Ministrant mikrofonu</p>
+        <h2>LITURGIA EUCHARYSTYCZNA</h2>
+        <h3>przygotowanie darów</h3>
+        <h4>przygotowanie ołtarza</h4>
+        <p class="comment">mszał, kielich(y), puszki, korporał(y), puryfikaterze</p>
+        <p class="function">Ministanci ołtarza -</p>
+        <p class="function">Ministrant księgi</p>
+        <h4>procejsa z darami</h4>
+        <p class="bishop insignia">na przejście: »pastorał» podanie »pastorał» odebranie</p>
+        <p class="comment">możliwe, że procejsa z darami znaczyna się w trakcie przygotowania ołtarza; asystuje ceremoniarz[ i diakoni]{; przed i po przekazaniu daru - pokłon do ks. biskupa}; kolejność:  patena z hostią(po lewej) – wino i woda(po prawej)</p>
+        <p class="function-old">Ministranci ołtarza</p>
+        <h4>Okadzenie</h4>
+        <p class="comment">
+            <span class="bishop">na początek - pokłon do ks. biskupa</span>
+            <span class="deacon">diakon trzyma łódkę po lewej stronie ministranta kadzidła</span>
+            zasypanie kadzidła
+            <span class="deacon">diakon oddaje łódkę ministrantowi łódki i przekazuje kadzielnicę celebransowi <span class="bishop">pokłon do ks. Biskupa</span>, ministranci kadzidła i łódki odchodzą, Diakon asystuje po prawej stronie celebransa</span>
+            okadzenie: 1. darów; 2. (pokłon) krzyża (pokłon); 3. ołtarza; posługujący po lewej stronie przechodzi na prawą stronę aby nie być okadzanym; 4. <span class="command">→surgant(powstańmy)</span> okadza ministrant kadzidła <span class="deacon">lub diakon</span> (pokłon) kapłana (pokłon) (ewentualnie koncelebransów); 5. przechodząc lewą stroną ołtarza (pokłon) ludu (pokłon) - w trakcie ustawić mikrofon <span class="deacon">przychodzi ministrant kadzidła - diakon oddaje kadzielnice</span>
+        </p>
+        <p class="function-old">Ministrant kadzidła i ministrant łódki</p>
+        <p class="comment bishop">na początek - pokłon do ks. biskupa</p>
+        <h4>Lavabo</h4>
+        <p class="comment bishop">na koniec - pokłon do ks. biskupa</p>
+        <p class="function-old">Ministanci ołtarza</p>
+        <h3>Modlitwa nad darami</h3>
+        <p class="bishop insignia">zaraz po: »piuska»odebranie</p>
+        <p class="comment">Posługę przy Mszale sprawuje<span class="deacon"> diakon lub gdzy go nie ma</span>:</p>
+        <p class="function-old">Ministrant mszału</p>
+        <h3>Modlitwa Eucharystyczna</h3>
+            <h4>dialog</h4>
+            <h4>prefacja</h4>
+            <h4>aklamacja: Święty</h4>
+        <p class="comment">przychodzi kadzidło, teksty na koncelebransów; rozdawanie - zaczynając od wewnętrzenej strony</p>
+        <p class="function">Ministranci rozdający teksty modlitw eucharystycznych -</p>
+        <p class="function-old">Ministrant kadzidła</p>
+        <p class="function">Ministranci dwonków -</p>
+        <p class="comment bishop">Uwaga: ministranci insygnów nie klękają</p>
+            <h4>epikleza</h4>
+            <h4>konsekracja</h4>
+            <h4>opowiadanie o ustanowieniu</h4>
+        <p class="comment">Od tej pory klękamy przed ołtarzem</p>
+            <h4>aklamacja po przeistoczeniu</h4>
+            <h4>anamneza</h4>
+            <h4>modlitwa ofiarnicza</h4>
+            <h4>epikleza komunijna</h4>
+            <h4>modlitwy wstawiennicze</h4>
+        <p class="comment"></p>
+            <h4>I koncelebrans jest z prawej strony celebransa</h4>
+        <p class="function-old">Ministrant mikrofonu</p>
+            <h4>doksologia końcowa</h4>
+        <p class="comment">odbieranie - zaczynając od zewnętrznej strony</p>
+        <p class="function-old">Ministranci rozdający teksty modlitw eucharystycznych</p>
+        <h3>Komunia święta</h3>
+            <h4>Wezwanie do Modlitwy Pańskiej</h4>
+            <h4>Modlitwa Pańska</h4>
+            <h4>embolizm</h4>
+            <h4>obrzęd pokoju</h4>
+            <h4>łamanie chleba i ryt zmieszania postaci</h4>
+            <h4>Oto baranek Boży</h4>
+            <h4>Komunia św.</h4>
+        <p class="comment">teraz trzeba przygotować ołtarz: zdjąć Mszał i mikrofon</p>
+        <p class="function">Ministranci z patenami -</p>
+        <p class="exposition">{W? W odpowiednim momecie trzeba przygotować: klęcznik, welon, monstrancję, mikrofon i agendę.
+            Ministrant dbający o klęcznik
+            Ministrant mikrofonu
+            Ceremoniarz ?W}
+        </p>
+        <p class="comment bishop">Kiedy biskup zakończy rozdawać Komunię św. to będzie potrzebne vasculum i puryfikarzeż, następnie: <span class="insignia">»piuska»podanie</span></p>
+        <p class="function bishop">Ministranci z vasculum i puryfikaterzem -</p>
+        <p class="comment">
+            Ministranci ołtarza - pomoc do puryfikacji</br>
+            Po puryfikacji: od tej pory przechodząc przed ołtarzem czynimy pokłon; robimy już to wcześniej jeżeli puryfikacja się odbywa na kredensji?</br>
+            Jeżeli będzie uroczyste błogosławieństwo: Mszał i mikrofon zostaje?
+        </p>
+        <h4>Modlitwa po komunii św.</h4>
+        <p class="bishop insignia">tuż po: »mitra»podanie</p>
+        <p class="function-old">Ministrant mszału {i ministrant mikrofonu}</p>
+        <p class="confirmation">{B?
+            ▪ Podziękowanie przez młodzież za udzielenie Sakramenu Bierzmowania - młodzież w tym czasie siedzi
+            ▪ Podziękowanie przez Księdza Proboszcza ?B}</p>
+        <p class="parish-indulgence">{O?
+            ▪ Podziękowanie przez Ks. Proboszcza i przedstawicieli Parafii ?O}</p>
+<div class="if-not-eucharistic-procession">
+        <h2>OBRZĘDY ZAKOŃCZENIA</h2>
+        <h3>krótkie ogłoszenia</h3>
+        <div class="dlugie-wyjscie">
+            <p class="comment">ustawiają się:</p>
+            <p class="function-old">Ministranci światła</p>
+            <p class="function-old">Ministrant krzyża</p>
+        </div>
+        <p class="bishop insignia">po wstaniu z miejsca przewodniczenia: »pastorał»wręczenie</p>
+    <div class="if-not-exposition">
+        <h3>pozdrowienie i błogosławieństwo kapłańskie</h3>
+        <p class="confirmation">{B? Jeżeli było bierzmowanie:
+            - uroczyste błogosławieństwo s. 73”
+            - jeżeli ma być zdjęcie to zaraz po błogosławieństwie ministranci idą do zakrystii ?B}</p>
+        <h3>rozesłania</h3>
+        <p class="bishop insignia">z mitrą i pastorałem</p>
+        <h3>ucałowanie ołtarza</h3>
+        <p class="comment dlugie-wyjscie">podczas ucałowania ołtarza asysta ustawia się przed ołtarzem. W trakcie: <span>→ formerum processio ad regresum (formujemy procesję na wyjście)</span></p>
+        <p class="function-old local-tradition">Ministranci asystujący</p>
+        <h3>ukłon / przyklęknięcie i procesja na zakończenie</h3>
+        <p class="command">→ genu flectant(klękamy) / inclinatio ad altare(pokłon do ołtarza) → severtant(obracamy się) → procedant(idziemy)</p>
+    </div>
+</div>
+        <p class="comment">? Liturgiczny koniec Mszy św. ?</p>
+        <p class="exposition">{W? Czy przedłużenie Mszy św.? Możliwe, że będą jeszcze jakieś ogłoszenia. Ks. biskup pierwszy idzie do klęcznika, procesja ustawia się w trakcie, ale nie tamując drogi.
+            • Wystawienie Najświętszego Sakramentu
+        po dojściu»Mitra i pastorał»odebranie
+        Ministranci kadzidła i łódki ustawiają się po prawej stronie ołtarza
+        Ministrant kadzidła
+        Ministrant łódki
+        {Charzykowy: Ministranci dwonków}
+            • { Jeżeli ma być procesja eucharystyczna: - teraz formujemy procesję, podczas ustawiania się nie czynimy znaków czci; Czy jest potrzebna kapa?
+        Procesja Eucharystyczna
+        Ministranci światła
+        Ministrant krzyża
+        pozostali usługujący niemający funkcji podczas procesji
+        Wszyscy obracają się w stronę ołtarza. Podczas wyjęcia Najświętszego Sakramentu wszyscy oprócz coś trzymających klęczą.
+        }
+                    ▪ {na początek - pokłon do ks. biskupa} [diakon trzyma łódkę po lewej stronie ministranta kadzidła]
+        zasypanie kadzidła [diakon oddaje łódkę ministrantowi łódki] {na koniec - pokłon do ks. biskupa}
+                    ▪ okadzenie
+        Ministrant z welonem -
+        Ministranci kadzidła i łódki idą przed Najświętszym Sakramentem. Wszyscy wstają, rozpoczyna się procesja. Szyk procesji:
+        Ministranci światła i ministrant krzyża
+        {Chorągwie i feretrony}
+        pozostali usługujący niemający funkcji podczas procesji
+        {Charzykowy: Chorągwie i feretrony}
+        koncelebransi
+        Ministrant kadzidła i łódki
+        Celebrans z Najświętszym Sakramentem
+            • Pod koniec trzeba przygotować agendę na klęczniku
+        Zakończenie {Adoracji}{Procesji Eucharystycznej}
+        Ministranci kadzidła i łódki ustawiają się po prawej stronie ołtarza, reszta ministrantów ustawia się przed ołtarzem. Celebrans stawia Najświętszy Sakrament na ołtarzu i oddaje welon.
+        Ministrant z welonem
+                ◦ {na początek - pokłon do ks. biskupa}
+        okadzenie {na koniec - pokłon do ks. biskupa}
+        Ministrant kadzidła i łódki
+                ◦ modlitwa zakończona Amen
+        Ministrant mikrofonu - po prawej stronie
+        Ministrant księgi -  po lewej stronie
+        Ministrant z welonem
+                ◦ Potrzebny welon, kadzidło idzie na środek
+        błogosławieństwo eucharystyczne
+        ?W}</p>
+
+        <p class="comment">Po zakończeniu służby: <span class="command">→ sistant(stajemy) → inclinatio ad crucem(pokłon do krzyża) →  inclinatio ad celebrantem(pokłon do celebracsa)
+            → Deo gratias(Bogu niech będą dzięki)</span>
+            </p>
+
+    </div>
+    <script src="main.js"></script> 
+</body>
+</html>
