@@ -1,34 +1,38 @@
 let proverbsJSON = {
     "przysłowie": [
-        "PROSTA DROGA NAJKRÓTSZA",
-        "BABA Z WOZU, KONIOM LŻEJ",
-        "KOMU PORA, TEMU CZAS"
+        'a co po czyjej wielkości, jak nie ma w głowie mądrości',
+        'Adam cóż by poradził, gdyby Bóg w raju Ewy nie posadził',
+        'adwokat niech głowę, a koń niech ma nogi',
+        'ani kura za darmo nie gdacze',
+        'apetyt rośnie w miarę jedzenia'
     ]
 };
-
-/* GAME WINDOW MANAGEMENT TOOLS AND ENTITIES */
 
 class GameWindow {
     #gameWindow = undefined;
 
     #proverbContainer = undefined;
-    #proverbs = new Proverbs(proverbsJSON);
+    //#proverbs = new Proverbs(proverbsJSON);
 
     #category = undefined;
 
     playersStats = undefined;
 
     constructor(){
-        this.#gameWindow = window.open("", "myWindow", "width=500,height=300");
+        this.#gameWindow = window.open(window.location.href, '_blank');
         this.#gameWindow.document.write(
             `<!DOCTYPE html>
             <html lang="pl-PL">
             <head>
+            <title>Koło fortuny</title>
             <link rel="stylesheet" type="text/css" href="styles.css">
             </head>
             <body>
             </body>`
         );
+        this.#gameWindow.blur();
+        window.focus();
+
         this.playersStats = new PlayersStats(this.#gameWindow.document.body);
         this.#proverbContainer = new ProverbContainer(this.#gameWindow.document.body);
         this.#category = new Category(this.#gameWindow.document.body);
@@ -50,14 +54,14 @@ class GameWindow {
         return this.#proverbContainer.setActive(letter);
     }
 
-    nextProverb(){
-        console.log("nextProverb");
-
-        this.#proverbs.next();
-        this.#proverbContainer.newProverb(this.#proverbs.proverbString);
-        this.#category.setCategory(this.#proverbs.proverbCategory);
+    flipAll(){
+        this.#proverbContainer.flipAll();
     }
 
+    nextProverb(category, proverb){
+        this.#proverbContainer.newProverb(proverb);
+        this.#category.setCategory(category);
+    }
 }
 
 class Category {
@@ -200,6 +204,10 @@ class ProverbContainer {
         return this.#flipped;
     }
 
+    flipAll(){
+        this.#proverb.flipAll();
+    }
+
     get flipped(){
         return this.#flipped;
     }
@@ -229,7 +237,7 @@ class Proverbs{
         for(const [category_, provs_] of Object.entries(jsonData)){
             let provs = []
             for(const prov of provs_){
-                provs.push(new Proverb(prov));
+                provs.push(new Proverb(prov.toUpperCase()));
             }
             this.#proverbsSet[category_] = provs;
         }
@@ -246,6 +254,10 @@ class Proverbs{
     get proverbCategory(){
         console.log(this.#proverbCategory);
         return this.#proverbCategory;
+    }
+
+    lastProverb(){
+        return (Object.keys(this.#proverbsSet).length === 0)? true : false;
     }
 
     next() {
@@ -323,6 +335,20 @@ class Proverb {
         word.classList.add("word");
         return word;
 	}
+
+    flipAll(){
+        let count = 0;
+        for(let i = 0; i < this.#letters.length; i++){
+			if(this.#letters[i] === null){
+				continue;
+			}
+            if(this.#allowedLetters.search(this.#letters[i].content) != -1 && !this.#letters[i].flipped){
+                this.#letters[i].flip();
+                count++;
+            }
+        }
+        return count;
+    }
 
     setActive(letter){
         let count = 0;
@@ -447,8 +473,7 @@ class ChooseLetterButton extends Button {
         super(document.getElementById('getLetter'));
         this.get.addEventListener("submit", (e)=>{
             e.preventDefault();
-            this.value = this.get.elements['getLetter'].value;
-            console.log(this.get.elements["getLetter"].value);
+            this.value = this.get.elements['getLetter'].value.toUpperCase();
 
             onSubmit();
             this.get.elements["getLetter"].value = '';
@@ -468,7 +493,7 @@ class ChooseLetterButton extends Button {
 
         let div1 = document.createElement('div');
         let label = document.createElement('label');
-        label.textContent = 'type letter';
+        label.textContent = 'Litera';
         div1.appendChild(label);
         form.appendChild(div1);
 
@@ -476,6 +501,7 @@ class ChooseLetterButton extends Button {
         let input = document.createElement('input');
         input.setAttribute('name', 'getLetter');
         input.type='text';
+        input.maxLength=1;
         div2.appendChild(input);
         form.appendChild(div2);
 
@@ -489,19 +515,23 @@ class ChooseLetterButton extends Button {
 
 class SetWheelValueButton extends Button{
     static #actualValue = null;
-    value = null;
+    #value = null;
 
     constructor(onSubmit = ()=>{}){
         super(document.getElementById("setWheel"));
 
         this.get.addEventListener("submit", (e)=>{
             e.preventDefault();
-            this.value = parseInt(this.get.elements["typeWheelValue"].value);
-            console.log(this.get.elements["typeWheelValue"].value);
+            this.#value = parseInt(this.get.elements["typeWheelValue"].value);
 
             onSubmit();
             //this.get.elements["typeWheelValue"].value = '';
         });
+    }
+
+    //return value directly from textarea
+    get value(){
+        return parseInt(this.get.elements["typeWheelValue"].value);
     }
 
     set disabled(bollean){
@@ -521,7 +551,7 @@ class SetWheelValueButton extends Button{
 
         let div1 = document.createElement('div');
         let label = document.createElement('label');
-        label.textContent = 'type number';
+        label.textContent = 'Mnożnik koła';
         div1.appendChild(label);
         form.appendChild(div1);
 
@@ -532,9 +562,9 @@ class SetWheelValueButton extends Button{
         div2.appendChild(input);
         form.appendChild(div2);
 
-        let submit = document.createElement("button");
+        /*let submit = document.createElement("button");
         submit.textContent = 'Ok';
-        form.appendChild(submit);
+        form.appendChild(submit);*/
 
         return form;
     }
@@ -624,9 +654,6 @@ class PlayerPicker {
     }
 
     get value(){
-        //if(this.#htmlElement.options[this.#htmlElement.selectedIndex].text === 'new'){
-        //    return 'new';
-        //}
         return this.#htmlElement.value;
     }
     set value(name){
@@ -665,8 +692,8 @@ class PlayerPicker {
         select.id = 'players';
 
         let optionNew = document.createElement('option');
-        optionNew.text = 'new';
-        optionNew.value = 'new';
+        optionNew.text = '+';
+        optionNew.value = '+';
         select.appendChild(optionNew);
 
         let index = 0;
@@ -765,7 +792,7 @@ class PlayerDataPicker {
 
         let inputElement = document.createElement('div');
         let label = document.createElement('label');
-        label.textContent = 'player name';
+        label.textContent = 'Imie';
         inputElement.appendChild(label);
         let input = document.createElement('input');
         input.setAttribute('name', 'playerName');
@@ -775,7 +802,7 @@ class PlayerDataPicker {
 
         let playerPoints = document.createElement('div');
         let labelPlayerPoints = document.createElement('label');
-        labelPlayerPoints.textContent = 'player points, type number';
+        labelPlayerPoints.textContent = 'Punkty';
         playerPoints.appendChild(labelPlayerPoints);
         let inputPlayerPoints = document.createElement('input');
         inputPlayerPoints.setAttribute('name', 'playerPoints');
@@ -785,7 +812,7 @@ class PlayerDataPicker {
 
         let playerRoundPoints = document.createElement('div');
         let labelPlayerRoundPoints = document.createElement('label');
-        labelPlayerRoundPoints.textContent = 'player round points, type number';
+        labelPlayerRoundPoints.textContent = 'Punkty rundy';
         playerRoundPoints.appendChild(labelPlayerRoundPoints);
         let inputPlayerRoundPoints = document.createElement('input');
         inputPlayerRoundPoints.setAttribute('name', 'playerRoundPoints');
@@ -818,7 +845,7 @@ class PlayerDeleteButton extends Button{
     static get createElement(){
         let button = document.createElement('button');
         button.id = 'deletePlayer';
-        button.textContent = 'delete';
+        button.textContent = 'Usuń';
 
         return button;
     }
@@ -853,7 +880,7 @@ class PlayerManagerUI {
         container.appendChild(playerManagementDiv);
 
         this.#playerPicker = new PlayerPicker(this.#players.playersList, ()=>{
-            if(this.#playerPicker.value === 'new'){
+            if(this.#playerPicker.value === '+'){
                 this.#playerDeleteButton.disable();
                 //this.playerDataPicker.disabledInputRoundPoints = true;
                 this.playerDataPicker.name = '';
@@ -873,7 +900,7 @@ class PlayerManagerUI {
 
         this.playerDataPicker = new PlayerDataPicker(()=>{
             //console.log(this.#playerPicker.value, this.playerDataPicker.name, this.playerDataPicker.points);
-            if(this.#playerPicker.value === 'new'){
+            if(this.#playerPicker.value === '+'){
                 this.#playerDeleteButton.enable();
                 //this.playerDataPicker.disabledInputRoundPoints = false;
                 this.#playerPicker.addPlayer(this.playerDataPicker.name);
@@ -896,17 +923,21 @@ class PlayerManagerUI {
         });
 
         this.#playerDeleteButton = new PlayerDeleteButton(()=>{
-            if(this.#playerPicker.value === 'new'){
+            if(this.#playerPicker.value === '+'){
                 return;
             }
             this.#onDeletePlayer(this.#playerPicker.value);
 
             this.#playerPicker.deleteSelectedPlayer();
-            this.#playerPicker.selected = 'new';
+            this.#playerPicker.selected = '+';
             this.playerDataPicker.name = '';
             this.playerDataPicker.points = '';
             this.playerDataPicker.roundPoints = '';
         });
+    }
+
+    get selectedPlayer(){
+        return this.#playerPicker.value;
     }
 
     set onPlayerSelect(fun){
@@ -940,6 +971,20 @@ class NextProverbButton extends Button {
     }
 }
 
+class FlipAllButton extends Button {
+    constructor(container, onClick){
+        super(FlipAllButton.createElement);
+        container.appendChild(this.button);
+        this.button.addEventListener('click', ()=>{onClick()});
+    }
+
+    static get createElement(){
+        let button = document.createElement('button');
+        button.textContent = "Pokaż całe hasło";
+        return button;
+    }
+}
+
 
 /* GAME */
 
@@ -955,6 +1000,8 @@ class Game {
     //players
     #players = undefined;
     #playerManagerUI = undefined;
+
+    #proverbs = new Proverbs(proverbsJSON);
     
     #chooseLetterButton = undefined;
     #setWheelValueButton = undefined;
@@ -1010,7 +1057,11 @@ class Game {
         //set disabled until player is picked
         //this.#setWheelValueButton.disabled = true;
 
-        new NextProverbButton(container, ()=>{
+        new FlipAllButton(container, ()=>{
+            this.#gameWindow.flipAll();
+        });
+
+        let nextProverbButton = new NextProverbButton(container, ()=>{
             //add round points to points
             //1) in playerManagerUI
             this.#playerManagerUI.playerDataPicker.points += this.#playerManagerUI.playerDataPicker.roundPoints;
@@ -1018,14 +1069,26 @@ class Game {
             //not sumbit form, beacuse we changes stats directly in players
 
             //2) change all players stats in players and in window
+            //  * append round points to points of selected player
+            this.#players.find(this.#playerManagerUI.selectedPlayer).points += this.#players.find(this.#playerManagerUI.selectedPlayer).roundPoints;
+
+            //  * reset round points to 0 of all players
             for(const name of this.#players.names){
-                this.#players.find(name).points += this.#players.find(name).roundPoints;
+                //this.#players.find(name).points += this.#players.find(name).roundPoints;
                 this.#players.find(name).roundPoints = 0;
 
                 this.#gameWindow.playersStats.update(name);
             }
 
-            this.#gameWindow.nextProverb();
+            //3) generate new proverb in gameWindow
+            //  * get new proverb
+            this.#proverbs.next();
+            //  * if it's last proverb disable this button
+            if(this.#proverbs.lastProverb()){
+                nextProverbButton.disable();
+            }
+            //  * update gameWindow
+            this.#gameWindow.nextProverb(this.#proverbs.proverbCategory, this.#proverbs.proverbString);
         });
     }
 }
