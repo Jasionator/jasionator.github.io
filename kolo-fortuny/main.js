@@ -1,11 +1,33 @@
 let proverbsJSON = {
-    "przysłowie": [
-        'a co po czyjej wielkości, jak nie ma w głowie mądrości',
-        'Adam cóż by poradził, gdyby Bóg w raju Ewy nie posadził',
-        'adwokat niech głowę, a koń niech ma nogi',
-        'ani kura za darmo nie gdacze',
-        'apetyt rośnie w miarę jedzenia'
-    ]
+    "Religia": [
+		'Najświętszy sakrament'
+    ],
+	"Rekolecje": [
+		'Drogi jesteś w moich oczach i ja cię miłuję'
+	],
+    "Przysłowia": [
+		'apetyt rośnie w miarę jedzenia'
+    ],
+    "Ikona": [
+		'Łukasz ewangelista'
+	],
+    "Biblia": [
+		'Zacheuszu, zejdź prędko'
+	],
+    "Sport": [
+		'napój izotoniczny'
+	],
+	"Reakcja": [
+		'kiwać głową z politowaniem'
+	],
+	"": [''],
+	"Natura": [
+		'park krajobrazowy'
+    ],
+    "Rzecz": [
+		'nietrafiony prezent'
+	],
+	"Koniec": ['Dziękujemy za udział!']
 };
 
 class GameWindow {
@@ -261,19 +283,23 @@ class Proverbs{
     }
 
     next() {
+		
+		
         var size = Object.keys(this.#proverbsSet).length;
         if(size === 0){
             console.log("you have had run out of proverbs");
             return false;
         }
+        
+        /*
 
         let categories = Array.from(Object.keys(this.#proverbsSet));
 
-        let randomCategoryIndex = Proverbs.#randomIndex(categories);
-        let randomCategory = categories[randomCategoryIndex];
+        let randomCategoryIndex = Proverbs.#randomIndex(categories);*/
+        let randomCategory = Object.keys(this.#proverbsSet)[0]; //categories[randomCategoryIndex];
         
 
-        let randomProverbIndex = Proverbs.#randomIndex(this.#proverbsSet[randomCategory]);
+        let randomProverbIndex = 0;//Proverbs.#randomIndex(this.#proverbsSet[randomCategory]);
         let randomProverb = this.#proverbsSet[randomCategory][randomProverbIndex];
 
         //remove used proverb
